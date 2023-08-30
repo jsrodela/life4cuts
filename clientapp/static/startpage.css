@@ -1,0 +1,130 @@
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+html{
+    width:100%;
+    height: 100%;
+}
+body{
+    background-color: black;
+    width:100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column; /*수직 정렬*/
+    align-items: center;
+    justify-content: center;
+}
+
+.photo{
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+
+}
+.startbutton{
+    font-family: 'Cafe24Ssurround';
+    font-size: xx-large;
+    color:white;
+    text-shadow: -2px 0px rgb(195, 57, 254), 0px 2px rgb(195, 57, 254), 2px 0px rgb(195, 57, 254), 0px -2px rgb(195, 57, 254);
+    border-color: rgb(195, 57, 254);
+    width: 250px;
+    height: 75px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 50px;
+    display:block;
+    margin:auto;
+    border-style:solid;
+    border-top-width: medium;
+    border-bottom-width: medium;
+    border-left-width: medium;
+    border-right-width: medium;
+}
+.startbutton:hover{
+    color:rgb(97, 97, 97);
+}
+.flex{
+    background-color: rgb(0, 0, 0);
+}
+.disp{
+    background-color: rgb(255, 255, 255);
+    font-family: 'Cafe24Ssurround';
+    color:white;
+    border-radius: 50px;
+    border-style:solid;
+    border-top-width: medium;
+    border-bottom-width: medium;
+    border-left-width: medium;
+    border-right-width: medium;
+    border-color: rgb(195, 57, 254);
+}
+.numPan{
+    background-color: black;
+}
+.num_btn{
+    font-family: 'Cafe24Ssurround';
+    font-size: x-large;
+    background-color: rgb(0, 0, 0);
+    color:white;
+    border-style:solid;
+    border-top-width: medium;
+    border-bottom-width: medium;
+    border-left-width: medium;
+    border-right-width: medium;
+    border-color: rgb(195, 57, 254);    
+}
+.num_btn:hover{
+    color:rgb(97, 97, 97);
+}
+.container{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-around;    
+}
+#wrapper{
+    margin:auto;
+    width:100%;
+    height: 100%;
+    display:flex;
+    flex-direction:column;
+}
+html,body{
+    height:100%;
+}
+.numPan{
+    border-radius: 10px;
+}
+.numPan .disp input{
+    width:200px;
+    padding:20px;
+    background: none;
+    text-align: center;
+    color:black;
+    font: size 2px;
+}
+.numPan .nums > .r div{
+    width: 65px;
+    height:65px;
+    margin: 10px;
+    border: 2px solid rgb(195, 57, 254);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.flex{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+.flex,numPan{
+    height: 100%;
+}
+#name{
+    font-family: 'Cafe24Ssurround';
+    font-size: large;
+}

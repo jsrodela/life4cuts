@@ -1,7 +1,7 @@
 import time
 import cv2
 
-capture = cv2.VideoCapture(2, cv2.CAP_DSHOW)
+capture = cv2.VideoCapture(1, cv2.CAP_DSHOW)
 print(capture.get(3), capture.get(4))
 
 # capture.read()

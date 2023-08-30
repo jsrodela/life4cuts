@@ -1,0 +1,72 @@
+
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+html{
+    width:100%;
+    height: 100%;
+}
+body{
+    background-color:black;
+    width:100%;
+    height: 100%;
+    position: relative;
+}
+.cambox{
+    background-color:white;
+    border-color: rgb(195, 57, 254);
+    border-style:solid;
+    border-top-width: medium;
+    border-bottom-width: medium;
+    border-left-width: medium;
+    border-right-width: medium;
+    border-radius: 50px;
+    width: 90%;
+    height: 70%;
+    padding: 10px 5px 10px 30px;
+    border-width: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display:flex;
+    flex-direction: row;
+}
+.camera{
+    border-radius: 10px;
+    width:100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+}
+
+#timer {
+    font-size: 2em;
+    font-family: 'Cafe24Ssurround';
+    font-weight: 50;
+    color: white;
+    padding: 10px;
+    width: 10%;
+    color: white;
+}
+
+#timer div {
+    display: inline-block;
+    min-width: 45px;
+    padding: 5px;
+    background: #020b43;
+    border-radius: 80px;
+    border: 2px solid #030d52;
+    text-align: center;
+}
+
+#timer div span {
+    font-family: 'Cafe24Ssurround';
+    color: #ffffff;
+    display: block;
+    margin-top: 15px;
+    font-size: .10em;
+    font-weight: 200;
+}

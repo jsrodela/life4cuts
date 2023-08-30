@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프레임 선택</title>
+    <!--@font-face {
+        font-family: 'Cafe24SsurroundAir';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;}!-->
+        
+</head>
+<body>
+    <style>
+        div.frameshoose {
+			position: absolute;
+			top: 0px;
+			left: 550px;
+		}
+        body {background-color: rgb(0, 19, 58); }
+        @font-face {
+            font-family: 'Cafe24Ssurround';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        h2{
+            font-family: 'Cafe24Ssurround';
+            font-size: 60px;
+            text-align: center;
+            font-weight: 'bold';
+            text-shadow: 0px 5px 15px rgb(128, 128, 128);
+        }
+
+    </style>
+    <div class="framechoose">
+        <h2 style="color:#00ffd5">프레임 선택</h2>
+    </div>
+     <style>
+        div.black {
+			position: absolute;
+			top: 33%;
+			left: 8.5%;
+            border: none;
+            border-radius: 16px;
+            background: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+            padding: 5px 5px;
+            font-weight: bold;
+            box-shadow: 0px 5px 15px gray;
+            cursor: pointer;
+		}
+        div.white {
+			position: absolute;
+			top: 33%;
+			left: 52.5%;
+            border: none;
+            border-radius: 16px;
+            background: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+            padding: 5px 5px;
+            font-weight: bold;
+            box-shadow: 0px 5px 15px gray;
+            cursor: pointer;
+		}
+        #imgbut10{
+            position: absolute;
+            top: 18%;
+            left: 70%;
+            border: none;
+            border-radius: 16px;
+            background: rgb(190, 255, 78);
+            color: rgb(0, 0, 0);
+            padding: 18px 45px;
+            font-weight: bold;
+            box-shadow: 0px 5px 15px gray;
+            cursor: pointer;
+        }
+    </style>   
+    <div class="black">
+        <img src="/static/images/2x3_black.png" height="300" width="500" alt="블랙프레임" style="margin-left: auto; margin-right: auto; display: block; border-radius: 3%;"/><!--border-radius: 3%;-->
+    </div>
+    <div class="white"> 
+        <img src="/static/images/2x3_white.png" height="300" width="500" alt="화이트프레임" style="margin-left: auto; margin-right: auto; display: block; border-radius: 3%;"/><!--border-radius: 3%;-->
+    </div>
+    <button id="imgbut10">다음</button>
+</body>
+</html>
