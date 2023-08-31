@@ -18,7 +18,7 @@ def combine_photo():
     right_margin = int(left_margin)
     photo_width = int(0.92 * background.size[0] / 3)
 
-    photo_height = int(photo_width * photo.size[1] / photo.size[0])
+    photo_height = int(photo_width * photo[0].size[1] / photo[0].size[0])
     middle_height = int(0.02 * background.size[0])
     top_margin = int(0.05 * background.size[0])
     below_margin = int(background.size[1] - (photo_height*2 + middle_height + top_margin))
