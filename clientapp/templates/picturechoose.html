@@ -7,7 +7,7 @@
 </head>
 <body>
     <center>
-        <h1 style="color:#ff0081;">배경을 선택하세요</h1>
+        <h1 style="color:#ff0081;">사진 선택 (6개)</h1>
     </center>
     <style>
         body{
@@ -126,13 +126,34 @@
         }
     </style>
 <!--    <button id="imgbut10"></button>-->
-    <button id="imgbut1" onclick="location.href = '/cam?bg=1'"><img src="/static/images/bg1.jpg" width="300" height="200"></button>
-    <button id="imgbut2" onclick="location.href = '/cam?bg=2'"><img src="/static/images/bg2.jpg" width="300" height="200"></button>
-    <button id="imgbut3" onclick="location.href = '/cam?bg=3'"><img src="/static/images/bg3.jpg" width="300" height="200"></button>
-    <button id="imgbut4" onclick="location.href = '/cam?bg=4'"><img src="/static/images/bg4.jpg" width="300" height="200"></button>
-    <button id="imgbut5" onclick="location.href = '/cam?bg=5'"><img src="/static/images/bg5.jpg" width="300" height="200"></button>
-    <button id="imgbut6" onclick="location.href = '/cam?bg=6'"><img src="/static/images/bg6.jpg" width="300" height="200"></button>
+    <button id="imgbut1" onclick="click(1);"><img src="/static/images/{{ img1 }}" width="300" height="200"></button>
+    <button id="imgbut2" onclick="click(2);"><img src="/static/images/{{ img2 }}" width="300" height="200"></button>
+    <button id="imgbut3" onclick="click(3);"><img src="/static/images/{{ img3 }}" width="300" height="200"></button>
+    <button id="imgbut4" onclick="click(4);"><img src="/static/images/{{ img4 }}" width="300" height="200"></button>
+    <button id="imgbut5" onclick="click(5);"><img src="/static/images/{{ img5 }}" width="300" height="200"></button>
+    <button id="imgbut6" onclick="click(6);"><img src="/static/images/{{ img6 }}" width="300" height="200"></button>
+    <button id="imgbut7" onclick="click(7);"><img src="/static/images/{{ img7 }}" width="300" height="200"></button>
+    <button id="imgbut8" onclick="click(8);"><img src="/static/images/{{ img8 }}" width="300" height="200"></button>
 
+    <script>
+        let arr = [0, 0, 0, 0, 0, 0, 0, 0];
 
+        function click(num) {
+           arr[num] = arr[num]==0 ? 1:0;
+           let cnt=0;
+           for (let i=0;i<8;i++) {
+                if(arr[i]) cnt++;
+           }
+           if (cnt == 6) {
+            let str = "";
+            for (let i=0;i<8;i++) {
+                if (arr[i] && str=="") str += 'select=' + str(i);
+                else if (arr[i]) str += '&select=' + str(i);
+            }
+            location.href = '/framechoose?' + str;
+           }
+        }
+
+    </script>
 </body>
 </html>

@@ -10,4 +10,7 @@ urlpatterns = [
     path('cam', views.cam),
     path('picturechoose', views.picturechoose),
     path('framechoose', views.framechoose),
+    path('wstest', views.wstest),
+    path('end', views.end),
 ]
+
