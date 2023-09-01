@@ -23,7 +23,7 @@ def combine_photo():
     top_margin = int(0.05 * background.size[0])
     below_margin = int(background.size[1] - (photo_height*2 + middle_height + top_margin))
 
-    for i in range(4):
+    for i in range(6):
         photo[i] = photo[i].resize((photo_width, photo_height))
 
     background.paste(photo[0], (left_margin,top_margin))
