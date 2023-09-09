@@ -62,6 +62,7 @@ def cam_while():
         if do_capture:
             with open('img_' + name + '_' + str(photo_count) + '.png', 'wb') as f:
                 f.write(base64.decodebytes(data))
+                static.pics.append(f.name)
             do_capture = False
 
             photo_count += 1
@@ -71,7 +72,7 @@ def cam_while():
                     'img': 'end'
                 }))
                 photo_count = 1
-            static.pics.append(b64)
+            # static.pics.append(b64)
 
         # print(data)
         asyncio.run(get_channel_layer().group_send(ROOM_GROUP_NAME, {

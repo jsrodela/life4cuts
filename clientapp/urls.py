@@ -11,6 +11,7 @@ urlpatterns = [
     path('picturechoose', views.picturechoose),
     path('framechoose', views.framechoose),
     path('wstest', views.wstest),
+    path('loading', views.loading),
     path('end', views.end),
 ]
 

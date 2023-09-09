@@ -1,3 +1,5 @@
+import base64
+
 from django.shortcuts import render, redirect
 
 from clientapp import static, consumers
@@ -41,6 +43,32 @@ def framechoose(request):
     return render(request, '6_framechoose.html', {})
 
 
+def loading(request):
+    static.frame = request.GET.get('frame', 'black')
+
+    with open('img_' + static.code + static.frame, 'w') as f:
+        f.write('1')
+
+    frame_path = "clientapp/static/images/2x3_" + static.frame + ".png"
+    result_path = "result.png"
+    combine_photo(frame_path, static.pics, result_path)
+
+    with open(result_path, 'rb') as f:
+        img = f.read()
+        img_str = base64.b64encode(img).decode('utf-8')
+
+    return render(request, '7_loading.html', {
+        "result": img_str
+    })
+
+
+def end(request):
+
+    # combine_photo()
+
+    return render(request, '8_end.html', {'code': static.code })
+
+
 def wstest(request):
     return render(request, 'ws.html', {})
 
@@ -48,12 +76,3 @@ def wstest(request):
 def ws2(request, room_name):
     return render(request, 'ws2.html', {})
 
-
-def end(request):
-    static.frame = request.GET.get('frame', 'black')
-
-    with open('img_' + static.code + static.frame, 'w') as f:
-        f.write('1')
-    # combine_photo()
-
-    return render(request, '7_end.html', {'code': static.code })
