@@ -5,14 +5,21 @@ import json
 import random
 import threading
 from datetime import datetime
+from io import BytesIO
+
+from django.core.files.base import ContentFile
+from django.core.files.uploadedfile import InMemoryUploadedFile
+
+from . import models
 
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.layers import get_channel_layer
 
 from clientapp import static
-from utils import webcam
+from utils import webcam, chroma
 
 ROOM_GROUP_NAME = 'WEBCAM_GROUP'
+BASE64_STR = 'data:image/png;base64,'
 
 do_capture = False
 photo_count = 1
@@ -51,18 +58,18 @@ class CamConsumer(AsyncWebsocketConsumer):
         # print(data['img'])
         await self.send(text_data=data['img'])
 
+
 def cam_while():
-    global do_capture, photo_count
+    global do_capture, photo_count, run_thread
     now = datetime.now()
     name = str(now.hour) + str(now.minute) + str(now.second)
     static.code = name
-    while True:
+
+    while run_thread:
         data = webcam.getFrame()
         b64 = data.decode('utf-8')
         if do_capture:
-            with open('img_' + name + '_' + str(photo_count) + '.png', 'wb') as f:
-                f.write(base64.decodebytes(data))
-                static.pics.append(f.name)
+            start_photo_thread(data, photo_count)
             do_capture = False
 
             photo_count += 1
@@ -72,17 +79,22 @@ def cam_while():
                     'img': 'end'
                 }))
                 photo_count = 1
+                break
             # static.pics.append(b64)
 
         # print(data)
         asyncio.run(get_channel_layer().group_send(ROOM_GROUP_NAME, {
-           'type': 'send_data',
-           'img': b64
+            'type': 'send_data',
+            'img': b64
         }))
+
+    webcam.cleanup()
 
 
 thread = None
 run_thread = False
+
+
 def start_thread():
     global thread, run_thread
     run_thread = True
@@ -90,5 +102,23 @@ def start_thread():
 
 
 def end_thread():
-    global run_thread
+    global thread, run_thread
     run_thread = False
+    if thread is not None:
+        thread.join()
+    thread = None
+
+
+def start_photo_thread(data, order):
+    threading.Thread(target=manage_photo, args=(data, order), daemon=True).start()
+
+
+def manage_photo(data, order):
+    photo = models.cut.add_photo(data, order)
+    print("Saved Photo", order)
+
+    photo_corrected = chroma.remove_green_background(photo, models.bg_path(models.cut.bg))
+    print("Corrected Photo", order)
+
+    chroma_photo = models.cut.add_chroma(photo_corrected, order)
+    print("Saved Photo Chroma", order)

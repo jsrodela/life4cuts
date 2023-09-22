@@ -1,5 +1,5 @@
 function addNumberToInput(value) {
-  const inputElement = document.getElementById("name");
+  const inputElement = document.getElementById("people");
   inputElement.value = value; 
 }
 

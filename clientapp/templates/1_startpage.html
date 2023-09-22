@@ -11,14 +11,14 @@
                     <img class="photo" src="/static/images/neon.png">
                 </div>
                 <div>
-                    <button onclick="location.href='/background';" class="startbutton" type="button">시작하기</button>
+                    <button onclick="location.href='/background?people=' + document.getElementById('people').value.toString();" class="startbutton" type="button">시작하기</button>
                 </div>
             </div>
             <div class="item">
                 <div class="flex">
                     <div class="numPan">
                         <div class="disp">
-                            <input id="name" type="text" placeholder="인원수를 입력하세요" name="name" type="number" value="" disabled>
+                            <input id="people" placeholder="인원수를 입력하세요" name="people" type="number" value="" disabled>
                         </div>
                         <br>
                         <div class="nums">

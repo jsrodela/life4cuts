@@ -6,18 +6,29 @@ from PIL import Image
 
 from utils.chroma import remove_green_background
 
-capture = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-print(capture.get(3), capture.get(4))
+capture = None
 
-# capture.read()
-capture.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
-capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
-# capture.set(cv2.CAP_PROP_POS_FRAMES, 60)
 
-capture.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter.fourcc('M', 'J', 'P', 'G'))
+def setup():
+    global capture
+    capture = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+    print(capture.get(3), capture.get(4))
 
-print(capture.get(3), capture.get(4))
+    # capture.read()
+    capture.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+    capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+    # capture.set(cv2.CAP_PROP_POS_FRAMES, 60)
 
+    capture.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter.fourcc('M', 'J', 'P', 'G'))
+
+    print(capture.get(3), capture.get(4))
+
+
+def cleanup():
+    global capture
+    if capture is not None:
+        capture.release
+    capture = None
 
 def cvToPil(image):
     # convert from BGR to RGB
@@ -42,7 +53,10 @@ def pilToCv(image):
 
 prevTime = 0
 
+
 def getFrame():
+    if capture is None:
+        setup()
     ret, frame = capture.read()
 
     # try 1 (not working)
@@ -60,8 +74,8 @@ def getFrame():
     data = base64.b64encode(buffer)
     return data
 
-# if __name__ == '__main__':
 
+# if __name__ == '__main__':
 
 
 """
