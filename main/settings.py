@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import json
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,12 +27,19 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+try:
+    with open(BASE_DIR / 'settings.json', encoding='utf-8') as f:
+        conf = json.loads(f.read())
+except FileNotFoundError as err:
+    print()
+
 
 # Application definition
 
 INSTALLED_APPS = [
     'daphne',
     'clientapp',
+    'printapp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +47,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+match conf['type']:
+    case 'client':
+        # INSTALLED_APPS.insert(1, 'clientapp')
+        pass
+    case 'printer':
+        # INSTALLED_APPS.insert(1, 'printapp')
+        pass
+    case _:
+        print("Invalid type:", conf['type'], "\nCheck your settings.json")
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

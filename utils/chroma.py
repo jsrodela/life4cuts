@@ -22,9 +22,9 @@ background = background.resize((width, height))
 
 
 def remove_green_background(image_path, bg_path):
-    # 전반적으로 초록 낮추기
+    # 전반적으로 초록 낮추기 (빨강은 보정)
     image = Image.open(image_path).convert('RGB', (
-        1, 0, 0, 0,
+        0.95, 0, 0, 0,
         0, 0.9, 0, 0,
         0, 0, 1, 0
     )).convert('RGBA')

@@ -1,4 +1,7 @@
 .venv
 .idea
 db.sqlite3
-chromedriver.exe
+settings.json
+tests
+media
+storage

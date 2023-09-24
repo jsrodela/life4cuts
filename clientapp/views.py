@@ -3,6 +3,8 @@ import base64
 from django.shortcuts import render, redirect
 
 from clientapp import static, consumers
+from main import settings
+from utils import send_print
 from utils.combine_photo import combine_photo
 from . import models
 
@@ -65,7 +67,7 @@ def framechoose(request):
 
 
 def loading(request):
-    models.cut.status = request.GET.get('frame', 'black')
+    models.cut.frame = request.GET.get('frame', 'black')
 
     while len(models.cut.chromas) < 6:
         pass
@@ -81,7 +83,9 @@ def loading(request):
     models.cut.status = models.Status.LOAD
     models.cut.save()
 
-    print("Loading; frame:", models.cut.status)
+    send_print.send_post('http://' + settings.conf['printer_ip'] + '/send_print', result_path, models.cut.paper_count, models.cut.video_code)
+
+    print("Loading; frame:", models.cut.frame)
     return render(request, '7_loading.html', {
         "result": img_str
     })

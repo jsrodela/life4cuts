@@ -1,30 +1,31 @@
 # 인생네컷
-2023 잠신제 출품작
+2023 잠신제 출품작 & 10월 이벤트
 
 ## To-do
 - [X] 사진 합치기
 - [ ] 화면 흐름 말끔하게 다듬기
-- [ ] jamsin.tk에 영상? 이미지? 올리고 QR코드 생성해서 이미지에 부착 (QR이 먼저냐 이미지가 먼저냐..?)
+- [ ] jamsin.tk에 영상? 이미지? 올리고 QR코드 생성해서 이미지에 부착 (영상 올리고 QR 부착해서 출력)
 - [ ] utils 처리는 스레드 분리해서 웹소캣으로 통신
 - [ ] 영상 저장
 - [ ] 마지막 안내 문구 수정 (나가서 프린트, 머리띠 반납, jamsin.tk에서 다운로드)
-- [ ] 카메라 시작한 다음에 켜지게 해도 될듯
+- [X] 카메라 시작한 다음에 켜지게 해도 될듯
 - [ ] 사진 고르기
-- [ ] 프린터 부분 제작
-- [ ] static => models 포함 전반적인 refactor
+- [X] 프린터 부분 제작
+- [X] static => models 포함 전반적인 refactor
 
 ## 주요 모듈
 - Django (웹서버)
 - OpenCV2 (카메라 연결)
 - Pillow (사진 합성)
 - PyAutoGUI (인쇄 매크로)
+- requests (클라이언트-프린터, 파일서버 연결)
 
 ## 개발환경 설정
 
 0. Python, vscode, git 설치
 
 설치 안되어있는 것들만 설치하면 됩니다
-* Python: https://www.python.org/downloads/
+* Python (>=3.10): https://www.python.org/downloads/
 * Visual Studio Code: https://code.visualstudio.com/
 * Git: https://git-scm.com/download/win
 
@@ -63,7 +64,37 @@ activate.bat
 pip install -r requirements.txt
 ```
 
-5. 서버 실행
+5. DB 설정
+```commandline
+python manage.py migrate
+```
+
+6. settings.json 작성
+
+클라이언트의 경우:
+```json
+{
+  "type": "client",
+  "chroma": true,
+  "printer_ip": "123.456.789.012:8000"
+}
+```
+
+프린터의 경우:
+```json
+{
+  "type": "printer"
+}
+```
+
+7. 서버 실행
+
+클라이언트의 경우:
 ```commandline
 python manage.py runserver
+```
+
+프린터의 경우:
+```commandline
+python manage.py runserver 0.0.0.0:8000
 ```

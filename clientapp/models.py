@@ -41,6 +41,7 @@ class Cut(models.Model):
     chromas = models.JSONField(encoder=json.JSONEncoder, decoder=json.JSONDecoder, default=list)
     frame = models.CharField(max_length=5, default='black')
     status = models.CharField(max_length=5, choices=Status.STATUS, default=Status.START)
+    video_code = models.PositiveIntegerField(default=999999)  # jamsin.tk video code
 
     def add_photo(self, data: bytes, order: int) -> Path:
         if not os.path.exists(STORAGE / str(self.pk)):

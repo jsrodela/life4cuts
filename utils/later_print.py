@@ -1,3 +1,6 @@
+"""
+    잠신제때 찍었던 것들 나중에 뽑으려다가 계획 철회
+"""
 import os
 
 from PIL import Image
