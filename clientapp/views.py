@@ -51,7 +51,7 @@ def cam(request):
 def picturechoose(request):
     data = {}
     for i in range(6):
-        data['img' + str(i+1)] = static.pics[i]
+        data['img' + str(i + 1)] = static.pics[i]
     # models.cut.status = models.Status.
     return render(request, 'picturechoose.html', data)
 
@@ -72,9 +72,12 @@ def loading(request):
     while len(models.cut.chromas) < 6:
         pass
 
+    if consumers.video_thread is not None:
+        consumers.video_thread.join()
+
     frame_path = "clientapp/static/images/2x3_" + models.cut.frame + ".png"
-    result_path = "result.png"
-    combine_photo(frame_path, models.cut.chromas, result_path)
+    result_path = str(models.cut.storage() / "result.png")
+    combine_photo(frame_path, models.cut.chromas, result_path, models.cut.video_code)
 
     with open(result_path, 'rb') as f:
         img = f.read()
@@ -83,7 +86,8 @@ def loading(request):
     models.cut.status = models.Status.LOAD
     models.cut.save()
 
-    send_print.send_post('http://' + settings.conf['printer_ip'] + '/send_print', result_path, models.cut.paper_count, models.cut.video_code)
+    send_print.send_post('http://' + settings.conf['printer_ip'] + '/send_print', result_path, models.cut.paper_count,
+                         models.cut.video_code)
 
     print("Loading; frame:", models.cut.frame)
     return render(request, '7_loading.html', {
@@ -92,10 +96,9 @@ def loading(request):
 
 
 def end(request):
-
     # combine_photo()
 
-    return render(request, '8_end.html', {'code': static.code })
+    return render(request, '8_end.html', {'code': static.code})
 
 
 def wstest(request):
@@ -104,4 +107,3 @@ def wstest(request):
 
 def ws2(request, room_name):
     return render(request, 'ws2.html', {})
-

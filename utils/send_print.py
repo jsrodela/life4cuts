@@ -3,7 +3,7 @@ import json
 import requests
 
 
-def send_post(url: str, img_path, cnt: int, code: int) -> False:
+def send_post(url: str, img_path, cnt: int, code: int) -> bool:
     try:
         files = {'img': open(img_path, 'rb')}
         values = {'cnt': cnt, 'code': code}

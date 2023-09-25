@@ -44,10 +44,8 @@ class Cut(models.Model):
     video_code = models.PositiveIntegerField(default=999999)  # jamsin.tk video code
 
     def add_photo(self, data: bytes, order: int) -> Path:
-        if not os.path.exists(STORAGE / str(self.pk)):
-            os.mkdir(STORAGE / str(self.pk))
 
-        file_path = STORAGE / str(self.pk) / (str(order) + '_origin.png')
+        file_path = self.storage() / (str(order) + '_origin.png')
         with open(file_path, 'wb') as f:
             f.write(base64.decodebytes(data))
 
@@ -57,13 +55,20 @@ class Cut(models.Model):
         return file_path
 
     def add_chroma(self, image: Image, order: int) -> Path:
-        file_path = STORAGE / str(self.pk) / (str(order) + '_chroma.png')
+        file_path = self.storage() / (str(order) + '_chroma.png')
         image.save(file_path, 'png')
 
         self.chromas.append(str(file_path))
         self.save()
 
         return file_path
+
+    def storage(self) -> Path:
+        path = STORAGE / str(self.pk)
+        if not os.path.exists(path):
+            os.mkdir(path)
+
+        return path
 
 
 # cut = Cut()

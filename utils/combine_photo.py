@@ -1,11 +1,14 @@
 from PIL import Image
 import os
 
+from utils import qr
+
 
 def combine_photo(
         bg: str = "clientapp/static/images/2x3_white.png",
         pics: tuple = ("img_1.png", "img_2.png", "img_3.png", "img_4.png", "img_5.png", "img_6.png"),
-        result: str = "result.png"
+        result: str = "result.png",
+        qr_code: int = None
 ):
     background_path = os.path.join(os.getcwd(), bg)
     photo_path = []
@@ -43,12 +46,14 @@ def combine_photo(
         photo[i] = photo[i].crop((w_off//2, 0, photo[i].width - w_off//2, h))
         pass
 
+    """
     pos1 = (75, 64, 596, 463)
     pos2 = (614, 64, 1136, 463)
     pos3 = (1154, 64, 1676, 463)
     pos4 = (75, 480, 596, 879)
     pos5 = (614, 480, 1136, 879)
     pos6 = (1154, 480, 1676, 879)
+    """
 
 
     pos1 = (74, 64)
@@ -74,5 +79,11 @@ def combine_photo(
     background.paste(photo[4], (left_margin+photo_width+middle_width,top_margin+photo_height+middle_height))
     background.paste(photo[5], (left_margin+photo_width*2+middle_width*2,top_margin+photo_height+middle_height))
     """
+
+    # (0, 0) ~ (92, 92)
+    # x: 1584 ~ 1676, y: 989 ~ 1081
+    if qr_code is not None:
+        qr_img = qr.gen(qr_code)
+        background.paste(qr_img, (1584, 989))
 
     background.save(result_path)

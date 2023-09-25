@@ -18,7 +18,7 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.layers import get_channel_layer
 
 from clientapp import static
-from utils import webcam, chroma, make_video
+from utils import webcam, chroma, make_video, send_video
 
 ROOM_GROUP_NAME = 'WEBCAM_GROUP'
 BASE64_STR = 'data:image/png;base64,'
@@ -127,7 +127,23 @@ def manage_photo(data, order):
     print("Saved Photo Chroma", order)
 
 
+video_thread = None
+
+
 def start_video_thread():
-    threading.Thread(target=make_video.make_video,
-                     args=[(str(STORAGE / str(models.cut.pk) / '잠신네컷.mp4'))],
-                     daemon=True).start()
+    global video_thread
+    video_thread = threading.Thread(target=manage_video,
+                                    args=[(str(models.cut.storage() / '잠신네컷.mp4'))],
+                                    daemon=True)
+    video_thread.start()
+
+
+def manage_video(video_path: str):
+    make_video.make_video(video_path)
+    code = send_video.send_post(video_path)
+    if code is None:
+        print('Received code None')
+    else:
+        print('Received code:', code)
+        models.cut.video_code = code
+        models.cut.save()
