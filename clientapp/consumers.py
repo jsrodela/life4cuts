@@ -11,13 +11,14 @@ from django.core.files.base import ContentFile
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
 from main import settings
+from main.settings import STORAGE
 from . import models
 
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.layers import get_channel_layer
 
 from clientapp import static
-from utils import webcam, chroma
+from utils import webcam, chroma, make_video
 
 ROOM_GROUP_NAME = 'WEBCAM_GROUP'
 BASE64_STR = 'data:image/png;base64,'
@@ -80,6 +81,7 @@ def cam_while():
                     'img': 'end'
                 }))
                 photo_count = 1
+                start_video_thread()
                 break
             # static.pics.append(b64)
 
@@ -118,9 +120,14 @@ def manage_photo(data, order):
     photo = models.cut.add_photo(data, order)
     print("Saved Photo", order)
 
-
     photo_corrected = chroma.correct_photo(photo, settings.conf['chroma'], models.bg_path(models.cut.bg))
     print("Corrected Photo", order)
 
     chroma_photo = models.cut.add_chroma(photo_corrected, order)
     print("Saved Photo Chroma", order)
+
+
+def start_video_thread():
+    threading.Thread(target=make_video.make_video,
+                     args=[(str(STORAGE / str(models.cut.pk) / '잠신네컷.mp4'))],
+                     daemon=True).start()

@@ -4,9 +4,11 @@ import numpy as np
 import base64
 from PIL import Image
 
+from utils import make_video
 from utils.chroma import remove_green_background
 
 capture = None
+add_frame = False
 
 
 def setup():
@@ -30,44 +32,18 @@ def cleanup():
         capture.release
     capture = None
 
-def cvToPil(image):
-    # convert from BGR to RGB
-    color_coverted = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-
-    # convert from openCV2 to PIL
-    pil_image = Image.fromarray(color_coverted)
-
-    return pil_image
-
-
-def pilToCv(image):
-    # use numpy to convert the pil_image into a numpy array
-    numpy_image = np.array(image)
-    print(numpy_image)
-    # numpy_image = numpy_image.astype(np.uint8)
-    # convert to a openCV2 image and convert from RGB to BGR format
-    opencv_image = cv2.cvtColor(numpy_image, cv2.COLOR_RGB2BGR)
-
-    return opencv_image
-
-
-prevTime = 0
-
 
 def getFrame():
+    global add_frame
     if capture is None:
         setup()
     ret, frame = capture.read()
 
-    # try 1 (not working)
-    # pil_image = cvToPil(frame)
-    # removed = remove_green_background(pil_image)
-    # cv_image = pilToCv(removed)
-
-    # try 2 (unstable)
-    # hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    # mask = cv2.inRange(hsv, (50, 150, 0), (70, 255, 255))
-    # cv2.copyTo(cv2.imread("img.png"), mask, frame)
+    if add_frame:
+        make_video.frames.append(frame)
+        add_frame = False
+    else:
+        add_frame = True
 
     # cv2.imshow("VideoFrame", frame)
     ret, buffer = cv2.imencode('.jpg', frame)
