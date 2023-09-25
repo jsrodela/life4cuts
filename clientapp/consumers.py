@@ -118,6 +118,7 @@ def manage_photo(data, order):
     photo = models.cut.add_photo(data, order)
     print("Saved Photo", order)
 
+
     photo_corrected = chroma.correct_photo(photo, settings.conf['chroma'], models.bg_path(models.cut.bg))
     print("Corrected Photo", order)
 

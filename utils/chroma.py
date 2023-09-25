@@ -22,7 +22,7 @@ background = background.resize((width, height))
 
 
 def correct_photo(image_path, chroma: bool, bg_path=None):
-    # 전반적으로 초록 낮추기 (@TODO: 빨강 보정 필요?)
+    # 전반적으로 초록 낮추기
     image = Image.open(image_path).convert('RGB', (
         1, 0, 0, 0,
         0, 0.9, 0, 0,
