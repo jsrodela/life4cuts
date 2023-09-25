@@ -21,15 +21,23 @@ background = background.resize((width, height))
 # width, height = 1920, 1080
 
 
-def remove_green_background(image_path, bg_path):
-    # 전반적으로 초록 낮추기 (빨강은 보정)
+def correct_photo(image_path, chroma: bool, bg_path=None):
+    # 전반적으로 초록 낮추기 (@TODO: 빨강 보정 필요?)
     image = Image.open(image_path).convert('RGB', (
-        0.95, 0, 0, 0,
+        1, 0, 0, 0,
         0, 0.9, 0, 0,
         0, 0, 1, 0
     )).convert('RGBA')
 
     image = brightness(image)  # 밝기 보정
+
+    if chroma:
+        return remove_green_background(image, bg_path)
+    else:
+        return image
+
+
+def remove_green_background(image: Image, bg_path):
 
     # 크로마키 위해 픽셀 배열로 변환
     pixels = image.load()
@@ -59,7 +67,7 @@ def brightness(image):
 
 
 if __name__ == '__main__':
-    remove_green_background('../test_input2.png', '../bg1.jpg').save('../output.png')
+    correct_photo('../test_input2.png', True, '../bg1.jpg').save('../output.png')
 
 """
 remove_green_background(foreground)

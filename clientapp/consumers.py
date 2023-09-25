@@ -10,6 +10,7 @@ from io import BytesIO
 from django.core.files.base import ContentFile
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
+from main import settings
 from . import models
 
 from channels.generic.websocket import AsyncWebsocketConsumer
@@ -117,7 +118,7 @@ def manage_photo(data, order):
     photo = models.cut.add_photo(data, order)
     print("Saved Photo", order)
 
-    photo_corrected = chroma.remove_green_background(photo, models.bg_path(models.cut.bg))
+    photo_corrected = chroma.correct_photo(photo, settings.conf['chroma'], models.bg_path(models.cut.bg))
     print("Corrected Photo", order)
 
     chroma_photo = models.cut.add_chroma(photo_corrected, order)
