@@ -50,4 +50,5 @@ def broadcast_photo(b64, cnt, code):
                 'img': b64
             })
         }))
+        print("Broadcast photo")
 

@@ -1,5 +1,6 @@
 import base64
 import json
+import traceback
 
 import requests
 
@@ -25,4 +26,5 @@ def send_post(url: str, img_path, cnt: int, code: int) -> bool:
                 return False
     except Exception as ex:
         print("Exception while sending to printer;", ex)
+        traceback.print_exception(ex)
         return False
