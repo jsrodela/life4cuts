@@ -22,7 +22,7 @@ def make_video(output_path: str):
     images = np.array(frames)
     height, width, layers = images[0].shape
 
-    video = cv2.VideoWriter(output_path, cv2.VideoWriter_fourcc(*'MP4V'), 30, (width, height))
+    video = cv2.VideoWriter(output_path, cv2.VideoWriter_fourcc(*'mp4v'), 30, (width, height))
     for image in images:
         # frame = np.fromfile(os.path.join(image_folder, image), np.uint8)
         # video.write(cv2.imdecode(image, cv2.IMREAD_COLOR))

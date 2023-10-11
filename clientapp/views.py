@@ -83,10 +83,11 @@ def loading(request):
         img = f.read()
         img_str = base64.b64encode(img).decode('utf-8')
 
+
     models.cut.status = models.Status.LOAD
     models.cut.save()
 
-    send_print.send_post('http://' + settings.conf['printer_ip'] + '/send_print', result_path, models.cut.paper_count,
+    send_print.send_post(settings.conf['print_server'] + '/send_print', result_path, models.cut.paper_count,
                          models.cut.video_code)
 
     print("Loading; frame:", models.cut.frame)

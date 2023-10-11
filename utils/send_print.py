@@ -1,3 +1,4 @@
+import base64
 import json
 
 import requests
@@ -5,10 +6,12 @@ import requests
 
 def send_post(url: str, img_path, cnt: int, code: int) -> bool:
     try:
-        files = {'img': open(img_path, 'rb')}
-        values = {'cnt': cnt, 'code': code}
+        with open(img_path, 'rb') as f:
+            img = base64.b64encode(f.read()).decode('utf-8')
+        # files = {'img': open(img_path, 'rb')}
+        values = {'img': img, 'cnt': cnt, 'code': code}
 
-        r = requests.post(url, files=files, data=values)
+        r = requests.post(url, data=values)
         response = json.loads(r.content)
         match response['status']:
             case 'success':

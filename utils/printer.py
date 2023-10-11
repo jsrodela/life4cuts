@@ -8,9 +8,10 @@ def print_file(path: str, cnt: int):
     webbrowser.open_new(path)
     time.sleep(3)
     pyautogui.hotkey('ctrl', 'p')
-    time.sleep(3)
+    time.sleep(5)
     for i in range(3):
         pyautogui.hotkey('tab')
+    pyautogui.hotkey('ctrl', 'a')
     pyautogui.press(str(cnt))
     for i in range(6):
         pyautogui.hotkey('shift', 'tab')

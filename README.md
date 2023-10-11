@@ -21,6 +21,7 @@
 - Pillow (사진 합성)
 - PyAutoGUI (인쇄 매크로)
 - requests (클라이언트-프린터, 파일서버 연결)
+- Websocket (프린터 웹소캣)
 
 ## 개발환경 설정
 
@@ -78,14 +79,15 @@ python manage.py migrate
 {
   "type": "client",
   "chroma": true,
-  "printer_ip": "123.456.789.012:8000"
+  "print_server": "http://example.com"
 }
 ```
 
 프린터의 경우:
 ```json
 {
-  "type": "printer"
+  "type": "printer",
+  "print_server": "http://example.com"
 }
 ```
 

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-i55figz6d8w7n-u78d82f#eb1dw!11vos$ctzdf+u(^^xs2ome
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 try:
     with open(BASE_DIR / 'settings.json', encoding='utf-8') as f:
