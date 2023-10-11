@@ -4,6 +4,9 @@ import webbrowser
 import pyautogui
 
 
+FILE_NAME = 'print.png'
+
+
 # only on windows
 def activate_window(name):
     edge_windows = pyautogui.getWindowsWithTitle(name)[0]
@@ -22,7 +25,7 @@ def activate_window(name):
 def print_file(path: str, cnt: int):
     webbrowser.open_new(path)
     time.sleep(3)
-    activate_window('print.png')
+    activate_window(FILE_NAME)
     time.sleep(1)
     pyautogui.hotkey('ctrl', 'p')
     time.sleep(5)

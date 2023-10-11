@@ -2,33 +2,67 @@
 <html>
     <head>
         <!-- <meta http-equiv="refresh" content="5; url=file:///C:/Users/queen/OneDrive/%EB%AC%B8%EC%84%9C/images/cam.html"> -->
+        <link rel="stylesheet" href="/static/anim.css">
     </head>
     <body>
-        <p>
-            사진을 전송하고 있어요! 잠시만 기다려주세요.
-            <br>
-            <img src="data:image/png;base64,{{ result }}" width="800" height="500" />
-        </p>
-        
+        <div class="wrapper">
+            <img class="anim" src="/static/images/neon.png" width="400">
+            <span id="percent" class="remove">0%</span>
+            <h1 id="status" class="remove">마무리 중</h1>
+            <p id="tip" class="remove">이제 마지막 단계만 남았어요!</p>
+        </div>
+
+        <style>
+            @font-face {
+                font-family: 'Cafe24Ssurround';
+                src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+                font-weight: normal;
+                font-style: normal;
+            }
+            html,body{
+                width:100%;
+                height: 100%;
+                background-color: black;
+                text-align: center;
+                font-size: larger;
+            }
+
+            .wrapper {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+
+            span {
+                font-family: 'Cafe24Ssurround';
+                font-size: 140px;
+                color: #68fc6a;
+                text-shadow: 0px 0px 15px #68fc6a;
+                margin-bottom: 20px;
+            }
+
+            h1 {
+                font-family: 'Cafe24Ssurround';
+                text-shadow: 0px 0px 15px #ffb3fb;
+                font-size: 80px;
+                color: #ffb3fb;
+                margin: 0;
+            }
+            p {
+                color:white;
+                font-family: 'Cafe24Ssurround';
+                text-shadow: 0px 0px 15px #9cd4ff;
+                color: #9cd4ff;
+                font-size: 30px;
+                margin: 0;
+                margin-top: 20px;
+            }
+        </style>
+        <script src="/static/anim.js"></script>
+        <script src="/static/loading.js"></script>
     </body>
 </html>
-<style>
-@font-face {
-    font-family: 'Cafe24Ssurround';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-html,body{
-    width:100%;
-    height: 100%;
-    background-color: black;
-    text-align: center;
-    font-size: larger;
-}
-p{
-    color:white;
-    font-family: 'Cafe24Ssurround';
-    text-shadow: -2px 0px rgb(195, 57, 254), 0px 2px rgb(195, 57, 254), 2px 0px rgb(195, 57, 254), 0px -2px rgb(195, 57, 254);
-}
-</style>

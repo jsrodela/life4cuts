@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880*2
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880*2  # 10MB
 
 try:
     with open(BASE_DIR / 'settings.json', encoding='utf-8') as f:

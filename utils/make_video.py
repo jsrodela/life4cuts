@@ -26,9 +26,14 @@ def make_video(output_path: str):
     for image in images:
         # frame = np.fromfile(os.path.join(image_folder, image), np.uint8)
         # video.write(cv2.imdecode(image, cv2.IMREAD_COLOR))
+        # image = cv2.resize(image, (1080, 720), interpolation=cv2.INTER_CUBIC)
         video.write(image)
 
     # cv2.destroyAllWindows()
     video.release()
     frames.clear()
     print("Video complete")
+
+
+def clear_frames():
+    frames.clear()

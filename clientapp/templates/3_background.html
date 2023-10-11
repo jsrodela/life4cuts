@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/anim.css">
     <title>Document</title>
 </head>
 <body>
     <center>
-        <h1 style="color:#ff0081;">배경을 선택하세요</h1>
+        <h1 class="anim">배경을 선택하세요</h1>
     </center>
     <style>
         body{
@@ -22,12 +23,54 @@
         h1{
             font-family: 'Cafe24Ssurround';
             text-shadow: 0px 0px 15px #ff0081;
-        }
-        h1{
             font-size: 60px;
+            color:#ff0081;
         }
 
-        #imgbut10{
+        #wrapper {
+           margin: 30px;
+           display: flex;
+           flex-wrap: wrap;
+           flex-direction: row;
+           /*align-items: center;*/
+           justify-content: center;
+           align-items: space-evenly;
+        }
+
+        button {
+            margin: 20px;
+            padding: 1px;
+            border: 5px solid white;
+            border-radius: 10px;
+            width: 25%;
+            aspect-ratio: calc(3/2);
+            display: flex;
+            align-items: center;
+        }
+
+        button:hover {
+            background-color: gold;
+            border-color: gold;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+    </style>
+<!--    <button id="imgbut10"></button>-->
+    <div id="wrapper">
+        {% for i in '123456'|make_list %}
+        <button id="imgbut{{ i }}" class="anim1 click" onclick="remove(); location.href = '/cam?bg={{ i }}'"><img src="/static/images/bg{{ i }}.jpg" width="300" height="200"></button>
+        {% endfor %}
+    </div>
+    <script src="/static/anim.js"></script>
+</body>
+</html>
+
+<!--
+#imgbut10{
         position: absolute;
         top: 18%;
         left: 70%;
@@ -41,7 +84,7 @@
         cursor: pointer;
         }
 
-        #imgbut1{
+#imgbut1{
             position: absolute;
             top: 30%;
             left: 20%;
@@ -124,15 +167,4 @@
             box-shadow: 0px 5px 15px gray;
             cursor: pointer;
         }
-    </style>
-<!--    <button id="imgbut10"></button>-->
-    <button id="imgbut1" onclick="location.href = '/cam?bg=1'"><img src="/static/images/bg1.jpg" width="300" height="200"></button>
-    <button id="imgbut2" onclick="location.href = '/cam?bg=2'"><img src="/static/images/bg2.jpg" width="300" height="200"></button>
-    <button id="imgbut3" onclick="location.href = '/cam?bg=3'"><img src="/static/images/bg3.jpg" width="300" height="200"></button>
-    <button id="imgbut4" onclick="location.href = '/cam?bg=4'"><img src="/static/images/bg4.jpg" width="300" height="200"></button>
-    <button id="imgbut5" onclick="location.href = '/cam?bg=5'"><img src="/static/images/bg5.jpg" width="300" height="200"></button>
-    <button id="imgbut6" onclick="location.href = '/cam?bg=6'"><img src="/static/images/bg6.jpg" width="300" height="200"></button>
-
-
-</body>
-</html>
+-->

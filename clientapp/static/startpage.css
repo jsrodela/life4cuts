@@ -52,7 +52,7 @@ body{
 .disp{
     background-color: rgb(255, 255, 255);
     font-family: 'Cafe24Ssurround';
-    color:white;
+    color:black;
     border-radius: 50px;
     border-style:solid;
     border-top-width: medium;
@@ -60,6 +60,10 @@ body{
     border-left-width: medium;
     border-right-width: medium;
     border-color: rgb(195, 57, 254);
+    font-size: 20pt;
+    padding: 10px 5px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 .numPan{
     background-color: black;
@@ -82,7 +86,8 @@ body{
 .container{
     display:flex;
     flex-direction:row;
-    justify-content: space-around;    
+    justify-content: space-around;
+    align-items: center;
 }
 #wrapper{
     margin:auto;

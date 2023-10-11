@@ -1,6 +1,6 @@
 function addNumberToInput(value) {
   const inputElement = document.getElementById("people");
-  inputElement.value = value; 
+  inputElement.value = value;
 }
 
 const numButtons = document.querySelectorAll(".num_btn");

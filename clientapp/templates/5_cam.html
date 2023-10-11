@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="/static/cam.css">
         <meta charset="UTF-8" />
         <meta charset="EUC-KR" />
-
+        <link rel="stylesheet" href="/static/anim.css">
         <!-- 
         <meta http-equiv="refresh" content="80; url=https://w
         ww.naver.com/"> -->
@@ -13,10 +13,24 @@
     <body>
         <div class="cambox">
             <div class="camera">
-                <img id="cam" src="" width="1300" height="700"/>
+                <img id="cam" src=""/>
             </div>
-            <div id="timer"></div>
+            <div class="info">
+                <div id="timer"></div>
+                <span id="count">1/6</span>
+            </div>
         </div>
+
+        <div class="wrapper">
+            <div class="cover"></div>
+            <div class="anim popup">
+                <p>10초씩 총 6번 촬영이 진행됩니다.</p>
+                <button id="start" class="click">시작하기</button>
+            </div>
+        </div>
+
+        <audio id="shutter" src="/static/shutter.mp3" style="display: hidden;"></audio>
         <script src="/static/cam.js"></script>
+        <script src="/static/anim.js"></script>
     </body>
 </html>

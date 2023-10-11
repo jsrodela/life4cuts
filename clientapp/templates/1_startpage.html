@@ -3,41 +3,42 @@
     <head>
         <title>start</title>
         <link rel="stylesheet" href="/static/startpage.css">
+        <link rel="stylesheet" href="/static/anim.css">
     </head>
     <body>
         <div class="container">
             <div id="wrapper">
-                <div>
+                <div class="anim">
                     <img class="photo" src="/static/images/neon.png">
                 </div>
-                <div>
-                    <button onclick="location.href='/background?people=' + document.getElementById('people').value.toString();" class="startbutton" type="button">시작하기</button>
+                <div class="anim1">
+                    <button onclick="remove(); location.href='/background?people=' + document.getElementById('people').value.toString();" class="startbutton click" type="button">시작하기</button>
                 </div>
             </div>
             <div class="item">
                 <div class="flex">
-                    <div class="numPan">
-                        <div class="disp">
-                            <input id="people" placeholder="인원수를 입력하세요" name="people" type="number" value="" disabled>
-                        </div>
+                    <div class="numPan anim2">
+<!--                        <div class="disp">-->
+                            <input id="people" class="disp" placeholder="인원수를 입력하세요" name="people" type="number" value="" disabled>
+<!--                        </div>-->
                         <br>
                         <div class="nums">
                             <div class="flex r r1">
-                                <div class="num_btn" value="1"><span>1</span></div>
-                                <div class="num_btn" value="2"><span>2</span></div> 
-                                <div class="num_btn" value="3"><span>3</span></div>      
+                                <div class="num_btn click" value="1"><span>1</span></div>
+                                <div class="num_btn click" value="2"><span>2</span></div>
+                                <div class="num_btn click" value="3"><span>3</span></div>
                             </div>
                 
                             <div class="flex r r2">
-                                <div class="num_btn" value="4"><span>4</span></div>
-                                <div class="num_btn" value="5"><span>5</span></div> 
-                                <div class="num_btn" value="6"><span>6</span></div>  
+                                <div class="num_btn click" value="4"><span>4</span></div>
+                                <div class="num_btn click" value="5"><span>5</span></div>
+                                <div class="num_btn click" value="6"><span>6</span></div>
                             </div>
                 
                             <div class="flex r r3">
-                                <div class="num_btn" value="7"><span>7</span></div>
-                                <div class="num_btn" value="8"><span>8</span></div> 
-                                <div class="num_btn" value="9"><span>9</span></div> 
+                                <div class="num_btn click" value="7"><span>7</span></div>
+                                <div class="num_btn click" value="8"><span>8</span></div>
+                                <div class="num_btn click" value="9"><span>9</span></div>
                             </div> 
                 
                             <div class="flex r r4">
@@ -52,5 +53,6 @@
             </div>  
         </div>
         <script src="/static/startpage.js"></script>
+        <script src="/static/anim.js"></script>
     </body>
 </html>

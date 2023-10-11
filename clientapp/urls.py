@@ -13,5 +13,6 @@ urlpatterns = [
     path('wstest', views.wstest),
     path('loading', views.loading),
     path('end', views.end),
+    path('test/<str:name>', views.test)
 ]
 

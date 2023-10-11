@@ -4,7 +4,8 @@ from django.shortcuts import render, redirect
 
 from clientapp import static, consumers
 from main import settings
-from utils import send_print
+from main.settings import conf
+from utils import send_print, make_video
 from utils.combine_photo import combine_photo
 from . import models
 
@@ -27,6 +28,9 @@ def background(request):
     consumers.start_thread()
     models.cut.paper_count = int(request.GET.get('people', 1))
 
+    if not conf['chroma']:
+        return redirect('/cam?bg=1')
+
     models.cut.status = models.Status.BG
     models.cut.save()
     print("Background; paper_count:", models.cut.paper_count)
@@ -40,6 +44,7 @@ def guide(request):
 
 def cam(request):
     models.cut.bg = int(request.GET.get('bg', 1))
+    make_video.clear_frames()
 
     models.cut.status = models.Status.CAM
     models.cut.save()
@@ -69,37 +74,28 @@ def framechoose(request):
 def loading(request):
     models.cut.frame = request.GET.get('frame', 'black')
 
-    while len(models.cut.chromas) < 6:
-        pass
-
-    if consumers.video_thread is not None:
-        consumers.video_thread.join()
-
-    frame_path = "clientapp/static/images/2x3_" + models.cut.frame + ".png"
-    result_path = str(models.cut.storage() / "result.png")
-    combine_photo(frame_path, models.cut.chromas, result_path, models.cut.video_code)
-
-    with open(result_path, 'rb') as f:
-        img = f.read()
-        img_str = base64.b64encode(img).decode('utf-8')
-
-
+    # consumers.start_loading_thread()
     models.cut.status = models.Status.LOAD
     models.cut.save()
-
-    send_print.send_post('http://' + settings.conf['print_server'] + '/send_print', result_path, models.cut.paper_count,
-                         models.cut.video_code)
-
     print("Loading; frame:", models.cut.frame)
     return render(request, '7_loading.html', {
-        "result": img_str
+        # "result": img_str
     })
 
 
 def end(request):
     # combine_photo()
 
-    return render(request, '8_end.html', {'code': static.code})
+    # reopen photo to send to client
+    result_path = str(models.cut.storage() / "result.png")  # should be synced by 'consumers.py / manage_loading() / combine photo'
+    with open(result_path, 'rb') as f:
+        img = f.read()
+        img_str = base64.b64encode(img).decode('utf-8')
+
+    models.cut.status = models.Status.LOAD
+    models.cut.save()
+    print("Loading; frame:", models.cut.frame)
+    return render(request, '8_end.html', {'img_str': img_str})
 
 
 def wstest(request):
@@ -108,3 +104,7 @@ def wstest(request):
 
 def ws2(request, room_name):
     return render(request, 'ws2.html', {})
+
+
+def test(request, name):
+    return render(request, name, {})

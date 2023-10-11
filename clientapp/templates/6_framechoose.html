@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>프레임 선택</title>
+    <link rel="stylesheet" href="/static/anim.css">
     <!--@font-face {
         font-family: 'Cafe24SsurroundAir';
         src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
@@ -14,12 +15,13 @@
 </head>
 <body>
     <style>
-        div.frameshoose {
-			position: absolute;
-			top: 0px;
-			left: 550px;
+        div.framechoose {
+            text-align: center;
+			margin-bottom: 100px;
+			color:#00ffd5;
 		}
-        body {background-color: rgb(0, 19, 58); }
+        /*body {background-color: rgb(0, 19, 58); }*/
+        body {background-color: black;}
         @font-face {
             font-family: 'Cafe24Ssurround';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
@@ -34,38 +36,48 @@
             text-shadow: 0px 5px 15px rgb(128, 128, 128);
         }
 
-    </style>
-    <div class="framechoose">
-        <h2 style="color:#00ffd5">프레임 선택</h2>
-    </div>
-     <style>
-        div.black {
-			position: absolute;
-			top: 33%;
-			left: 8.5%;
-            border: none;
+        .frame {
             border-radius: 16px;
-            background: rgb(255, 255, 255);
-            color: rgb(0, 0, 0);
             padding: 5px 5px;
             font-weight: bold;
             box-shadow: 0px 5px 15px gray;
             cursor: pointer;
+        }
+
+        div.black {
+            background: rgb(255, 255, 255);
 		}
         div.white {
-			position: absolute;
-			top: 33%;
-			left: 52.5%;
-            border: none;
-            border-radius: 16px;
-            background: rgb(255, 255, 255);
-            color: rgb(0, 0, 0);
-            padding: 5px 5px;
-            font-weight: bold;
-            box-shadow: 0px 5px 15px gray;
-            cursor: pointer;
+            background: rgb(0, 0, 0);
 		}
-        #imgbut10{
+
+        .wrapper {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+
+    </style>
+    <div class="framechoose anim">
+        <h2>프레임 선택</h2>
+    </div>
+    <div class="wrapper">
+        <div class="frame black anim1 click">
+            <img src="/static/images/2x3_black.png" onclick="remove(); location.href = '/loading?frame=black'" height="300" width="500" alt="블랙프레임" style="margin-left: auto; margin-right: auto; display: block; border-radius: 3%;"/><!--border-radius: 3%;-->
+        </div>
+        <div class="frame white anim2 click">
+            <img src="/static/images/2x3_white.png" onclick="remove(); location.href = '/loading?frame=white'" height="300" width="500" alt="화이트프레임" style="margin-left: auto; margin-right: auto; display: block; border-radius: 3%;"/><!--border-radius: 3%;-->
+        </div>
+    </div>
+    <!--<button id="imgbut10">다음</button>-->
+    <script src="/static/anim.js"></script>
+</body>
+</html>
+
+
+
+<!--
+#imgbut10{
             position: absolute;
             top: 18%;
             left: 70%;
@@ -78,13 +90,4 @@
             box-shadow: 0px 5px 15px gray;
             cursor: pointer;
         }
-    </style>   
-    <div class="black">
-        <img src="/static/images/2x3_black.png" onclick="location.href = '/loading?frame=black'" height="300" width="500" alt="블랙프레임" style="margin-left: auto; margin-right: auto; display: block; border-radius: 3%;"/><!--border-radius: 3%;-->
-    </div>
-    <div class="white"> 
-        <img src="/static/images/2x3_white.png" onclick="location.href = '/loading?frame=white'" height="300" width="500" alt="화이트프레임" style="margin-left: auto; margin-right: auto; display: block; border-radius: 3%;"/><!--border-radius: 3%;-->
-    </div>
-    <button id="imgbut10">다음</button>
-</body>
-</html>
+-->

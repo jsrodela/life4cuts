@@ -2,88 +2,193 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="/static/anim.css">
+    <title>사진 선택</title>
+    <!--@font-face {
+        font-family: 'Cafe24SsurroundAir';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;}!-->
+        
 </head>
 <body>
-    <center>
-        <h1 style="color:#ff0081;">사진 선택 (6개)</h1>
-    </center>
     <style>
-        body{
-            background-color:#000000
-        }
+        div.frameshoose {
+			position: absolute;
+			top: 0px;
+			left: 550px;
+		}
+        body {background-color: rgb(0, 20, 61); }
         @font-face {
             font-family: 'Cafe24Ssurround';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
             font-weight: normal;
             font-style: normal;
         }
-        h1{
+
+        h2{
             font-family: 'Cafe24Ssurround';
-            text-shadow: 0px 0px 15px #ff0081;
-        }
-        h1{
             font-size: 60px;
+            text-align: center;
+            font-weight: 'bold';
+            text-shadow: 0px 0px 15px rgb(128,128,128);
         }
 
-        #imgbut10{
-        position: absolute;
-        top: 18%;
-        left: 70%;
-        border: none;
-        border-radius: 16px;
-        background: #bdea14;
-        color: rgb(0, 0, 0);
-        padding: 18px 45px;
-        font-weight: bold;
-        box-shadow: 0px 5px 15px gray;
-        cursor: pointer;
+        div.black {
+			position: absolute;
+			top: 33%;
+			left: 8.5%;
+		}
+        div.white {
+			position: absolute;
+			top: 33%;
+			left: 52.5%;
+		}
+
+        #wrapper {
+           margin: 30px;
+           display: flex;
+           flex-wrap: wrap;
+           flex-direction: row;
+           /*align-items: center;*/
+           justify-content: center;
+           align-items: space-evenly;
         }
 
+        button {
+            margin: 20px;
+            padding: 1px;
+            border: 5px solid white;
+            border-radius: 10px;
+        }
+    </style>
+    <div class="picturechoose anim">
+        <h2 style="color:#ff0081">배경 선택</h2>
+    </div>
+    <div id="wrapper">
+        <button id="imgbut1" class="anim1 click"><img src="/static/images/bg1.jpg" width="300" height="200"></button>
+        <button id="imgbut2" class="anim1 click"><img src="/static/images/bg2.jpg" width="300" height="200"></button>
+        <button id="imgbut3" class="anim1 click"><img src="/static/images/bg3.jpg" width="300" height="200"></button>
+        <button id="imgbut4" class="anim1 click"><img src="/static/images/bg4.jpg" width="300" height="200"></button>
+        <button id="imgbut5" class="anim1 click"><img src="/static/images/bg5.jpg" width="300" height="200"></button>
+        <button id="imgbut6" class="anim1 click"><img src="/static/images/bg6.jpg" width="300" height="200"></button>
+    </div>
+
+    <script src="/static/anim.js"></script>
+</body>
+</html>
+
+
+
+<!--
+/*div.imgbut5{
+            position: absolute;
+            bottom: 30%;
+            left: 31%;
+            border: none;
+            border-radius: 16px;
+            background: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+            padding: 80px 45px;
+            font-weight: bold;
+            box-shadow: 0px 5px 15px gray;
+            cursor: pointer;
+        }
+        div.imgbut6{
+            position: absolute;
+            bottom: 30%;
+            left: 31%;
+            border: none;
+            border-radius: 16px;
+            background: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+            padding: 80px 45px;
+            font-weight: bold;
+            box-shadow: 0px 5px 15px gray;
+            cursor: pointer;
+        }
+        div.imgbut7{
+            position: absolute;
+            bottom: 30%;
+            left: 31%;
+            border: none;
+            border-radius: 16px;
+            background: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+            padding: 80px 45px;
+            font-weight: bold;
+            box-shadow: 0px 5px 15px gray;
+            cursor: pointer;
+        }
+        div.imgbut8{
+            position: absolute;
+            bottom: 30%;
+            left: 31%;
+            border: none;
+            border-radius: 16px;
+            background: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+            padding: 80px 45px;
+            font-weight: bold;
+            box-shadow: 0px 5px 15px gray;
+            cursor: pointer;
+        }*/
+        /*
         #imgbut1{
             position: absolute;
             top: 30%;
             left: 20%;
             border: none;
             border-radius: 16px;
-            background: #ffffff;
+            background: rgb(255, 255, 255);
             color: rgb(0, 0, 0);
-            /* padding: 100px 130px; */
+            padding: 80px 45px;
             font-weight: bold;
             box-shadow: 0px 5px 15px gray;
             cursor: pointer;
         }
-
         #imgbut2{
             position: absolute;
             top: 30%;
-            left: 45%;
+            left: 35%;
             border: none;
             border-radius: 16px;
-            background: #ffffff;
+            background: rgb(255, 255, 255);
             color: rgb(0, 0, 0);
-            /*padding: 100px 130px;*/
+            padding: 80px 45px;
             font-weight: bold;
             box-shadow: 0px 5px 15px gray;
             cursor: pointer;
         }
-
         #imgbut3{
             position: absolute;
             top: 30%;
-            left: 70%;
+            left: 50%;
             border: none;
             border-radius: 16px;
-            background: #ffffff;
+            background: rgb(255, 255, 255);
             color: rgb(0, 0, 0);
-            /*padding: 100px 130px;*/
+            padding: 80px 45px;
             font-weight: bold;
             box-shadow: 0px 5px 15px gray;
             cursor: pointer;
         }
-
         #imgbut4{
+            position: absolute;
+            top: 30%;
+            left: 65%;
+            border: none;
+            border-radius: 16px;
+            background: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+            padding: 80px 45px;
+            font-weight: bold;
+            box-shadow: 0px 5px 15px rgb(128, 128, 128);
+            cursor: pointer;
+        }
+        #imgbut5{
             position: absolute;
             top: 65%;
             left: 20%;
@@ -91,69 +196,62 @@
             border-radius: 16px;
             background: rgb(255, 255, 255);
             color: rgb(0, 0, 0);
-            /*padding: 100px 130px;*/
+            padding: 80px 45px;
             font-weight: bold;
             box-shadow: 0px 5px 15px gray;
             cursor: pointer;
         }
-
-        #imgbut5{
-            position: absolute;
-            top: 65%;
-            left: 45%;
-            border: none;
-            border-radius: 16px;
-            background: rgb(255, 255, 255);
-            color: rgb(0, 0, 0);
-            /*padding: 100px 130px;*/
-            font-weight: bold;
-            box-shadow: 0px 5px 15px gray;
-            cursor: pointer;
-        }
-
         #imgbut6{
             position: absolute;
             top: 65%;
-            left: 70%;
+            left: 35%;
             border: none;
             border-radius: 16px;
             background: rgb(255, 255, 255);
             color: rgb(0, 0, 0);
-            /*padding: 100px 130px;*/
+            padding: 80px 45px;
             font-weight: bold;
             box-shadow: 0px 5px 15px gray;
             cursor: pointer;
         }
-    </style>
-<!--    <button id="imgbut10"></button>-->
-    <button id="imgbut1" onclick="click(1);"><img src="/static/images/{{ img1 }}" width="300" height="200"></button>
-    <button id="imgbut2" onclick="click(2);"><img src="/static/images/{{ img2 }}" width="300" height="200"></button>
-    <button id="imgbut3" onclick="click(3);"><img src="/static/images/{{ img3 }}" width="300" height="200"></button>
-    <button id="imgbut4" onclick="click(4);"><img src="/static/images/{{ img4 }}" width="300" height="200"></button>
-    <button id="imgbut5" onclick="click(5);"><img src="/static/images/{{ img5 }}" width="300" height="200"></button>
-    <button id="imgbut6" onclick="click(6);"><img src="/static/images/{{ img6 }}" width="300" height="200"></button>
-    <button id="imgbut7" onclick="click(7);"><img src="/static/images/{{ img7 }}" width="300" height="200"></button>
-    <button id="imgbut8" onclick="click(8);"><img src="/static/images/{{ img8 }}" width="300" height="200"></button>
-
-    <script>
-        let arr = [0, 0, 0, 0, 0, 0, 0, 0];
-
-        function click(num) {
-           arr[num] = arr[num]==0 ? 1:0;
-           let cnt=0;
-           for (let i=0;i<8;i++) {
-                if(arr[i]) cnt++;
-           }
-           if (cnt == 6) {
-            let str = "";
-            for (let i=0;i<8;i++) {
-                if (arr[i] && str=="") str += 'select=' + str(i);
-                else if (arr[i]) str += '&select=' + str(i);
-            }
-            location.href = '/framechoose?' + str;
-           }
+        #imgbut7{
+            position: absolute;
+            top: 65%;
+            left: 50%;
+            border: none;
+            border-radius: 16px;
+            background: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+            padding: 80px 45px;
+            font-weight: bold;
+            box-shadow: 0px 5px 15px gray;
+            cursor: pointer;
         }
-
-    </script>
-</body>
-</html>
+        #imgbut8{
+            position: absolute;
+            top: 65%;
+            left: 65%;
+            border: none;
+            border-radius: 16px;
+            background: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+            padding: 80px 45px;
+            font-weight: bold;
+            box-shadow: 0px 5px 15px gray;
+            cursor: pointer;
+        }
+        #imgbut10{
+            position: absolute;
+            top: 18%;
+            left: 70%;
+            border: none;
+            border-radius: 16px;
+            background: rgb(78, 246, 255);
+            color: rgb(0, 0, 0);
+            padding: 18px 45px;
+            font-weight: bold;
+            box-shadow: 0px 5px 15px gray;
+            cursor: pointer;
+        }
+        */
+-->

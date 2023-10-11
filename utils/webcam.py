@@ -45,6 +45,8 @@ def getFrame():
     else:
         add_frame = True
 
+    frame = cv2.flip(frame, 1)
+
     # cv2.imshow("VideoFrame", frame)
     ret, buffer = cv2.imencode('.jpg', frame)
     data = base64.b64encode(buffer)

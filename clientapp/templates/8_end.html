@@ -2,24 +2,66 @@
 <html>
     <head>
         <title>start</title>
-        <link rel="stylesheet" href="/static/startpage.css">
+        <link rel="stylesheet" href="/static/anim.css">
     </head>
     <body>
-        <div class="container">
-            <div id="wrapper">
-                <div>
-                    <img class="photo" src="/static/images/neon.png">
-                </div>
-                <div>
-                    <p style="color: white">완료!<br>밖의 직원에게 전화번호 알려주시면<br>인화된 다음에 연락드릴게요.<br> 코드 찍어가세요: {{ code                                                                                                                                                       }}</p>
-                    <button onclick="location.href='/startpage';" class="startbutton" type="button">처음으로</button>
-                </div>
-            </div>
-            <div class="item">
-                <div class="flex">
-                </div>
-            </div>  
+        <div class="wrapper">
+            <p class="anim">머리띠 반납하는 곳에서 수령할 수 있어요 :)</p>
+            <img src="data:image/png;base64,{{ img_str }}" class="anim1" width="700" />
+
+            <button onclick="remove(); location.href='/startpage';" class="startbutton anim2 click" type="button">처음으로</button>
+
+            <style>
+
+                @font-face {
+                    font-family: 'Cafe24Ssurround';
+                    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+                    font-weight: normal;
+                    font-style: normal;
+                }
+                html,body{
+                    width:100%;
+                    height: 100%;
+                    background-color: black;
+                    text-align: center;
+                    font-size: larger;
+                }
+
+                .wrapper {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                }
+                p {
+                    color:white;
+                    font-family: 'Cafe24Ssurround';
+                    text-shadow: 0px 0px 15px #68fc6a;
+                    color: #68fc6a;
+                    font-size: 30px;
+                    margin: 20px;
+                    text-align: center;
+                }
+                button {
+                    font-family: 'Cafe24Ssurround';
+                    font-size: xx-large;
+                    color:white;
+                    text-shadow: -2px 0px rgb(195, 57, 254), 0px 2px rgb(195, 57, 254), 2px 0px rgb(195, 57, 254), 0px -2px rgb(195, 57, 254);
+                    border-color: rgb(195, 57, 254);
+                    width: 250px;
+                    height: 75px;
+                    background-color: rgb(0, 0, 0);
+                    border-radius: 50px;
+                    display:block;
+                    border-style:solid;
+                    border-width: medium;
+                    margin: 20px;
+                }
+            </style>
         </div>
-        <script src="/static/startpage.js"></script>
+
+        <script src="/static/anim.js"></script>
     </body>
 </html>

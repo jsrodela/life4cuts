@@ -41,7 +41,7 @@ def add_print(data):
 
 
 def on_message(wsapp, msg):
-    print(msg)
+    # print(msg)
     data = json.loads(msg)
     add_print(data)
 
@@ -55,5 +55,6 @@ if __name__ == '__main__':
 
     while True:
         ws = websocket.WebSocketApp("ws://" + conf['print_server'] + "/ws/print", on_message=on_message)
+        print("Socket connected")
         ws.run_forever()
         print("Socket closed! reconnecting...")
