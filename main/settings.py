@@ -31,7 +31,7 @@ try:
     with open(BASE_DIR / 'settings.json', encoding='utf-8') as f:
         conf = json.loads(f.read())
 except FileNotFoundError as err:
-    print()
+    print(err)
 
 
 # Application definition

@@ -4,9 +4,26 @@ import webbrowser
 import pyautogui
 
 
+# only on windows
+def activate_window(name):
+    edge_windows = pyautogui.getWindowsWithTitle(name)[0]
+    try:
+        if edge_windows.isActive == False:
+            edge_windows.activate()
+        edge_windows.restore()
+        if edge_windows.isMaximized == False:
+            edge_windows.maximize()
+    except Exception as e:
+        edge_windows.minimize()
+        edge_windows.maximize()
+    return
+
+
 def print_file(path: str, cnt: int):
     webbrowser.open_new(path)
     time.sleep(3)
+    activate_window('print.png')
+    time.sleep(1)
     pyautogui.hotkey('ctrl', 'p')
     time.sleep(5)
     for i in range(3):

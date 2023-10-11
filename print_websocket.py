@@ -47,7 +47,13 @@ def on_message(wsapp, msg):
 
 
 if __name__ == '__main__':
+    try:
+        with open('settings.json', encoding='utf-8') as f:
+            conf = json.loads(f.read())
+    except FileNotFoundError as err:
+        print(err)
+
     while True:
-        ws = websocket.WebSocketApp("ws://" + settings.conf['print_server'] + "/ws/print", on_message=on_message)
+        ws = websocket.WebSocketApp("ws://" + conf['print_server'] + "/ws/print", on_message=on_message)
         ws.run_forever()
         print("Socket closed! reconnecting...")
