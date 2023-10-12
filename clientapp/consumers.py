@@ -138,6 +138,18 @@ latest_loading = {
 }
 
 
+def clear_loading():
+    global latest_loading
+    latest_loading = {
+        "type": "send_data",
+        "data": json.dumps({
+            "percent": 0,
+            "status": "마무리 중",
+            "tip": "이제 마지막 단계만 남았어요!"
+        })
+    }
+
+
 class LoadingConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         await self.channel_layer.group_add(LOADING_GROUP_NAME, self.channel_name)

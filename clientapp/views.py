@@ -18,6 +18,7 @@ def startpage(request):
     consumers.end_thread()
     models.cut = models.Cut()
 
+    consumers.clear_loading()
     models.cut.status = models.Status.START
     models.cut.save()
     print("StartPage;")

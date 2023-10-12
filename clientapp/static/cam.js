@@ -15,7 +15,7 @@ socket.onmessage = (e) => {
         }
         else {
             capturing = false;
-            countdown = 6;
+            countdown = 10;
             change_time();
             cnt++;
             change_count();
