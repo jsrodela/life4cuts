@@ -53,7 +53,17 @@ class CamConsumer(AsyncWebsocketConsumer):
             case 'cap':
                 do_capture = data['num']
             case 'end':
+                # video code
+                code = send_video.pre_code()
+                if code is None:
+                    print("Received code None")
+                else:
+                    print("Received code", code)
+                    models.cut.video_code = code
+                    models.cut.save()
+
                 start_loading_thread()
+                start_video_thread(code)
                 await self.send('end')
                 end_thread()
             case _:
@@ -191,36 +201,44 @@ def start_loading_thread():
 
 
 def manage_loading():
-    video_path = str(models.cut.storage() / '잠신네컷.mp4')
-
     # wait for chroma
     loading_update(1, "사진 보정 중", "방금 찍은 사진을 더 아름답게 꾸미고 있어요.")
     while len(models.cut.chromas) < 6:
         pass
 
-    # make video
-    loading_update(2, "동영상 만드는 중", "잠신네컷 찍던 소중한 추억을 배속 영상으로 남겨드려요.")
-    make_video.make_video(video_path)
-
-    # send video to jamsin.tk
-    loading_update(3, "동영상 올리는 중", "잠신고 파일 공유 서비스인 jamsin.tk에서 다운받을 수 있어요.")
-    code = send_video.send_post(video_path)
-    if code is None:
-        print('Received code None')
-    else:
-        print('Received code:', code)
-        models.cut.video_code = code
-        models.cut.save()
-
     # combine photo
-    loading_update(4, "잠신네컷 생성 중", "방금 찍은 6개의 사진을 합치고 있어요.")
+    loading_update(4, "잠신네컷 생성 중", "jamsin.tk에서 영상도 받을 수 있어요.")
     frame_path = "clientapp/static/images/2x3_" + models.cut.frame + ".png"
     result_path = str(models.cut.storage() / "result.png")
     combine_photo(frame_path, models.cut.chromas, result_path, models.cut.video_code)
 
     # send to printer
-    loading_update(5, "출력 준비 중", "1장을 출력하기까지 약 1분 정도 걸려요. 대신 출력 비용은 무료에요!")
+    loading_update(5, "출력 준비 중", "출력 비용은 무료에요!")
     send_print.send_post('http://' + settings.conf['print_server'] + '/send_print', result_path, models.cut.paper_count,
                          models.cut.video_code)
 
     loading_update(6, "출력 준비 완료!", "by RoDeLa 6.0 ♥")
+
+
+video_thread = None
+
+
+def start_video_thread(code: int):  # 작업 도중 다음컷 시작할수도 있으므로 매개변수로 따로 가져오기
+    global video_thread
+    video_thread = threading.Thread(target=manage_video,
+                                    args=[code],
+                                    daemon=True)
+    video_thread.start()
+
+
+def manage_video(code: int):
+    video_path = str(models.cut.storage() / '잠신네컷.mp4')
+
+    # make video
+    # loading_update(2, "동영상 만드는 중", "잠신네컷 찍던 소중한 추억을 배속 영상으로 남겨드려요.")
+    make_video.make_video(video_path)
+
+    # send video to jamsin.tk
+    # loading_update(3, "동영상 올리는 중", "잠신고 파일 공유 서비스인 jamsin.tk에서 다운받을 수 있어요.")
+    send_video.post_file(code, video_path)
+    print("Video Thread Complete, code:", code)

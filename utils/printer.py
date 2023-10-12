@@ -36,7 +36,7 @@ def print_file(path: str, cnt: int):
     for i in range(6):
         pyautogui.hotkey('shift', 'tab')
     pyautogui.press('enter')
-    time.sleep(3)
+    time.sleep(5)
     pyautogui.hotkey('alt', 'f4')
 
 

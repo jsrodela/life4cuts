@@ -20,5 +20,42 @@ def send_post(video_path):
                 print('Invalid response from video server;', r.raw)
                 return None
     except Exception as ex:
-        print("Exception while sending to printer;", ex)
+        print("Exception while sending to video server;", ex)
         return None
+
+
+def pre_code():
+    try:
+        r = requests.post("https://jamsin.tk/pre_code")
+        response = json.loads(r.content)
+
+        match response['status']:
+            case 'success':
+                code = response['code']
+                print('Received code', code)
+                return code
+            case _:
+                print('Invalid response from video server;', r.raw)
+                return None
+    except Exception as ex:
+        print("Exception while sending to video server;", ex)
+        return None
+
+
+def post_file(code: int, video_path):
+    try:
+        files = {'file': open(video_path, 'rb')}
+        values = {'code': code}
+
+        r = requests.post("https://jamsin.tk/post_code", files=files, data=values)
+        response = json.loads(r.content)
+        match response['status']:
+            case 'success':
+                print('Video file upload complete')
+                return True
+            case _:
+                print('Invalid response from video server;', r.raw)
+                return False
+    except Exception as ex:
+        print("Exception while sending to video server;", ex)
+        return False
