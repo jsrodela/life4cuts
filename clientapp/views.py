@@ -28,6 +28,7 @@ def startpage(request):
 def background(request):
     consumers.start_thread()
     models.cut.paper_count = int(request.GET.get('people', 1))
+    consumers.start_code_thread()
 
     if not conf['chroma']:
         return redirect('/cam?bg=1')
@@ -75,7 +76,7 @@ def framechoose(request):
 def loading(request):
     models.cut.frame = request.GET.get('frame', 'black')
 
-    # consumers.start_loading_thread()
+    consumers.start_loading_thread()
     models.cut.status = models.Status.LOAD
     models.cut.save()
     print("Loading; frame:", models.cut.frame)

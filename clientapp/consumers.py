@@ -53,17 +53,8 @@ class CamConsumer(AsyncWebsocketConsumer):
             case 'cap':
                 do_capture = data['num']
             case 'end':
-                # video code
-                code = send_video.pre_code()
-                if code is None:
-                    print("Received code None")
-                else:
-                    print("Received code", code)
-                    models.cut.video_code = code
-                    models.cut.save()
 
-                start_loading_thread()
-                start_video_thread(code)
+                start_video_thread(models.cut.video_code)
                 await self.send('end')
                 end_thread()
             case _:
@@ -164,12 +155,12 @@ class LoadingConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         await self.channel_layer.group_add(LOADING_GROUP_NAME, self.channel_name)
         await self.accept()
-        await self.send_data(latest_loading)
 
     async def disconnect(self, close_code):
         await self.channel_layer.group_discard(LOADING_GROUP_NAME, self.channel_name)
 
     async def receive(self, text_data):
+        await self.send_data(latest_loading)
         pass
 
     async def send_data(self, data):
@@ -182,7 +173,7 @@ def loading_update(order: int, status: str, tip: str):
     asyncio.run(get_channel_layer().group_send(LOADING_GROUP_NAME, {
         'type': 'send_data',
         'data': json.dumps({
-            'percent': order * 100 // 6,
+            'percent': order * 100 // 4,
             'status': status,
             'tip': tip
         })
@@ -207,17 +198,17 @@ def manage_loading():
         pass
 
     # combine photo
-    loading_update(4, "잠신네컷 생성 중", "jamsin.tk에서 영상도 받을 수 있어요.")
+    loading_update(2, "잠신네컷 생성 중", "jamsin.tk에서 영상도 받을 수 있어요.")
     frame_path = "clientapp/static/images/2x3_" + models.cut.frame + ".png"
     result_path = str(models.cut.storage() / "result.png")
     combine_photo(frame_path, models.cut.chromas, result_path, models.cut.video_code)
 
     # send to printer
-    loading_update(5, "출력 준비 중", "출력 비용은 무료에요!")
+    loading_update(3, "출력 준비 중", "출력 비용은 무료에요!")
     send_print.send_post('http://' + settings.conf['print_server'] + '/send_print', result_path, models.cut.paper_count,
                          models.cut.video_code)
 
-    loading_update(6, "출력 준비 완료!", "by RoDeLa 6.0 ♥")
+    loading_update(4, "출력 준비 완료!", "by RoDeLa 6.0 ♥")
 
 
 video_thread = None
@@ -242,3 +233,25 @@ def manage_video(code: int):
     # loading_update(3, "동영상 올리는 중", "잠신고 파일 공유 서비스인 jamsin.tk에서 다운받을 수 있어요.")
     send_video.post_file(code, video_path)
     print("Video Thread Complete, code:", code)
+
+
+code_thread = None
+
+
+def start_code_thread():
+    global code_thread
+    code_thread = threading.Thread(target=manage_code,
+                                   args=[],
+                                   daemon=True)
+    code_thread.start()
+
+
+def manage_code():
+    # video code
+    code = send_video.pre_code()
+    if code is None:
+        print("Received code None")
+    else:
+        print("Received code", code)
+        models.cut.video_code = code
+        models.cut.save()

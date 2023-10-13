@@ -32,3 +32,5 @@ function play_animation() {
 }
 setInterval(play_animation, 5000)
 play_animation()
+
+socket.send("done?")

@@ -47,7 +47,7 @@ def post_file(code: int, video_path):
         files = {'file': open(video_path, 'rb')}
         values = {'code': code}
 
-        r = requests.post("https://jamsin.tk/post_code", files=files, data=values)
+        r = requests.post("https://jamsin.tk/post_file", files=files, data=values)
         response = json.loads(r.content)
         match response['status']:
             case 'success':
