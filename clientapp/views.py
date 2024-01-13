@@ -15,7 +15,7 @@ def index(request):
 
 
 def startpage(request):
-    consumers.end_thread()
+    consumers.end_cam_thread()
     models.cut = models.Cut()
 
     consumers.clear_loading()
@@ -26,7 +26,7 @@ def startpage(request):
 
 
 def background(request):
-    consumers.start_thread()
+    consumers.start_cam_thread()
     models.cut.paper_count = int(request.GET.get('people', 1))
     consumers.start_code_thread()
 
@@ -65,7 +65,7 @@ def picturechoose(request):
 
 def framechoose(request):
     # static.sel = request.GET.get('select')
-    consumers.end_thread()
+    consumers.end_cam_thread()
 
     models.cut.status = models.Status.FRAME
     models.cut.save()

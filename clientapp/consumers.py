@@ -20,8 +20,11 @@ from channels.layers import get_channel_layer
 
 from utils import webcam, chroma, make_video, send_video, send_print
 
+# Redis settings
 CAM_GROUP_NAME = 'WEBCAM_GROUP'
 LOADING_GROUP_NAME = 'LOADING_GROUP'
+
+# Base64 encoding prefix string
 BASE64_STR = 'data:image/png;base64,'
 
 do_capture = False
@@ -56,12 +59,12 @@ class CamConsumer(AsyncWebsocketConsumer):
 
                 start_video_thread(models.cut.video_code)
                 await self.send('end')
-                end_thread()
+                end_cam_thread()
             case _:
                 print('Unknown received data;', data)
         pass
 
-    # Receive message from room group
+    # Receive message from room group (Redis -> Client)
     async def send_data(self, data):
         # message = event["message"]
         #
@@ -71,6 +74,7 @@ class CamConsumer(AsyncWebsocketConsumer):
         await self.send(text_data=data['data'])
 
 
+# Send cam data to Redis
 def cam_send(data: str):
     asyncio.run(get_channel_layer().group_send(CAM_GROUP_NAME, {
         'type': 'send_data',
@@ -79,10 +83,10 @@ def cam_send(data: str):
 
 
 def cam_while():
-    global do_capture, run_thread
+    global do_capture, run_cam_thread
     # now = datetime.now()
 
-    while run_thread:
+    while run_cam_thread:
         data = webcam.getFrame()
         b64 = data.decode('utf-8')
         cam_send(b64)
@@ -96,24 +100,25 @@ def cam_while():
     webcam.cleanup()
 
 
-thread = None
-run_thread = False
+cam_thread = None
+run_cam_thread = False
 
 
-def start_thread():
-    global thread, run_thread
-    run_thread = True
-    thread = threading.Thread(target=cam_while, daemon=True).start()
+def start_cam_thread():
+    global cam_thread, run_cam_thread
+    run_cam_thread = True
+    cam_thread = threading.Thread(target=cam_while, daemon=True).start()
 
 
-def end_thread():
-    global thread, run_thread
-    run_thread = False
-    if thread is not None:
-        thread.join()
-    thread = None
+def end_cam_thread():
+    global cam_thread, run_cam_thread
+    run_cam_thread = False
+    if cam_thread is not None:
+        cam_thread.join()
+    cam_thread = None
 
 
+# Disabled
 def start_photo_thread(data, order):
     threading.Thread(target=manage_photo, args=(data, order), daemon=True).start()
 
