@@ -5,3 +5,5 @@ settings.json
 tests
 media
 storage
+.DS_Store
+__pycache__

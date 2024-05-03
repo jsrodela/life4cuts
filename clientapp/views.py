@@ -94,7 +94,7 @@ def end(request):
         img = f.read()
         img_str = base64.b64encode(img).decode('utf-8')
 
-    models.cut.status = models.Status.LOAD
+    models.cut.status = models.Status.END
     models.cut.save()
     print("Loading; frame:", models.cut.frame)
     return render(request, '8_end.html', {'img_str': img_str})

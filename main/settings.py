@@ -40,8 +40,6 @@ except FileNotFoundError as err:
 
 INSTALLED_APPS = [
     'daphne',
-    'clientapp',
-    'printapp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,10 +50,10 @@ INSTALLED_APPS = [
 
 match conf['type']:
     case 'client':
-        # INSTALLED_APPS.insert(1, 'clientapp')
+        INSTALLED_APPS.insert(1, 'clientapp')
         pass
     case 'printer':
-        # INSTALLED_APPS.insert(1, 'printapp')
+        INSTALLED_APPS.insert(1, 'printapp')
         pass
     case _:
         print("Invalid type:", conf['type'], "\nCheck your settings.json")
