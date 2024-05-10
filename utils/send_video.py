@@ -1,8 +1,9 @@
 import json
 import requests
+from main import settings
 
 
-VIDEO_SERVER_URL = 'https://jamsin.tk/api'
+VIDEO_SERVER_URL = settings.VIDEO_SERVER_URL
 
 
 def send_post(video_path):
@@ -26,7 +27,7 @@ def send_post(video_path):
 
 def pre_code():
     try:
-        r = requests.post("https://jamsin.tk/pre_code")
+        r = requests.post(VIDEO_SERVER_URL + "/pre_code")
         response = json.loads(r.content)
 
         match response['status']:
@@ -47,7 +48,7 @@ def post_file(code: int, video_path):
         files = {'file': open(video_path, 'rb')}
         values = {'code': code}
 
-        r = requests.post("https://jamsin.tk/post_file", files=files, data=values)
+        r = requests.post(VIDEO_SERVER_URL + "/post_file", files=files, data=values)
         response = json.loads(r.content)
         match response['status']:
             case 'success':

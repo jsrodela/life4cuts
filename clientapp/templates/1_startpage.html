@@ -12,7 +12,7 @@
                     <img class="photo" src="/static/images/neon.png">
                 </div>
                 <div class="anim1">
-                    <button onclick="remove(); location.href='/background?people=' + document.getElementById('people').value.toString();" class="startbutton click" type="button">시작하기</button>
+                    <button id="start"; onclick="remove(); location.href='/background?people=' + document.getElementById('people').value.toString();" class="startbutton click" type="button" disabled>시작하기</button>
                 </div>
             </div>
             <div class="item">
@@ -24,25 +24,25 @@
                         <br>
                         <div class="nums">
                             <div class="flex r r1">
-                                <div class="num_btn click" value="1"><span>1</span></div>
-                                <div class="num_btn click" value="2"><span>2</span></div>
-                                <div class="num_btn click" value="3"><span>3</span></div>
+                                <div class="num_btn click" value="1" onclick="enablestartbtn()"><span>1</span></div>
+                                <div class="num_btn click" value="2" onclick="enablestartbtn()"><span>2</span></div>
+                                <div class="num_btn click" value="3" onclick="enablestartbtn()"><span>3</span></div>
                             </div>
                 
                             <div class="flex r r2">
-                                <div class="num_btn click" value="4"><span>4</span></div>
-                                <div class="num_btn click" value="5"><span>5</span></div>
-                                <div class="num_btn click" value="6"><span>6</span></div>
+                                <div class="num_btn click" value="4" onclick="enablestartbtn()"><span>4</span></div>
+                                <div class="num_btn click" value="5" onclick="enablestartbtn()"><span>5</span></div>
+                                <div class="num_btn click" value="6" onclick="enablestartbtn()"><span>6</span></div>
                             </div>
                 
                             <div class="flex r r3">
-                                <div class="num_btn click" value="7"><span>7</span></div>
-                                <div class="num_btn click" value="8"><span>8</span></div>
-                                <div class="num_btn click" value="9"><span>9</span></div>
+                                <div class="num_btn click" value="7" onclick="enablestartbtn()"><span>7</span></div>
+                                <div class="num_btn click" value="8" onclick="enablestartbtn()"><span>8</span></div>
+                                <div class="num_btn click" value="9" onclick="enablestartbtn()"><span>9</span></div>
                             </div> 
                 
                             <div class="flex r r4">
-                                <div class="num_btn" value="0"><span>0</span></div>
+                                <div class="num_btn" value="0" onclick="disablestartbtn()"><span>0</span></div>
                             </div>
                 
                         </div>

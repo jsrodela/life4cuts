@@ -1,7 +1,8 @@
 import qrcode
 from PIL.Image import Image
+from main import settings
 
-VIDEO_SERVER_URL = 'https://jamsin.tk/receive?code='
+VIDEO_SERVER_URL = settings.VIDEO_SERVER_URL + '/receive?code='
 
 
 def gen(code: int) -> Image:

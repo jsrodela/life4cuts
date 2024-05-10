@@ -9,25 +9,12 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-import json
+import os, json
 from pathlib import Path
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-i55figz6d8w7n-u78d82f#eb1dw!11vos$ctzdf+u(^^xs2ome'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['*']
-
-DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880*2  # 10MB
 
 try:
     with open(BASE_DIR / 'settings.json', encoding='utf-8') as f:
@@ -35,6 +22,30 @@ try:
 except FileNotFoundError as err:
     print(err)
 
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+
+# SECURITY WARNING: keep the secret key used in production secret!
+
+def get_settings(setting, conf=conf):
+    try:
+        return conf[setting]
+    except KeyError:
+        error_msg = "Cannot Load Settings.json".format(setting)
+        raise ImproperlyConfigured(error_msg)
+
+SECRET_KEY = get_settings("SECRET_KEY")
+
+VIDEO_SERVER_URL = get_settings("VIDEO_SERVER_URL")
+
+PRINT_FILE_NAME = get_settings("PRINT_FILE_NAME")
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = get_settings("DEBUG")
+
+ALLOWED_HOSTS = ['*']
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880*2  # 10MB
 
 # Application definition
 

@@ -2,9 +2,10 @@ import threading
 import time
 import webbrowser
 import pyautogui
+from main import settings
 
 
-FILE_NAME = 'print.png'
+FILE_NAME = settings.PRINT_FILE_NAME
 
 
 # only on windows
