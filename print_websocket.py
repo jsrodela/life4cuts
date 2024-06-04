@@ -11,7 +11,7 @@ print_list = []
 run_thread = False
 thread = None
 
-IMG_PATH = 'print.png'
+IMG_PATH = settings.PRINT_FILE_NAME
 
 
 def run_print():

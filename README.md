@@ -194,12 +194,18 @@ activate.bat
 pip install -r requirements.txt
 ```
 
-5. DB 설정
-```commandline
-python manage.py migrate
+5. settings.json 작성
+
+공통부분:
+```json
+{
+  "SECRET_KEY": "비밀키", 
+  "DEBUG": "True",
+  "VIDEO_SERVER_URL": "https://jamsin-file.kro.kr",
+  "PRINT_FILE_NAME": "print.png"
+}
 ```
 
-6. settings.json 작성
 
 클라이언트의 경우:
 ```json
@@ -223,6 +229,11 @@ python manage.py migrate
   "type": "printer",
   "print_server": "http://example.com"
 }
+```
+
+6. DB 설정
+```commandline
+python manage.py migrate
 ```
 
 7. 서버 실행
